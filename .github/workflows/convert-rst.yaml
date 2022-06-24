@@ -45,13 +45,11 @@ jobs:
           ls -la
 
       - name: Commit files
-        run: |
-          cd red-hat-ansible-automation-platform-documentation
-          ls -la
-          git config --global user.name "docs-bot"
-          git config --global user.email "docs-bot@redhat.com"
-          git add . --all
-          git commit -m "Synchronize converted Controller docs"
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: Synchronize converted Controller docs
+          committer_name: docs-bot
+          committer_email: docs-bot@redhat.com
 
       - name: Push changes
         uses: ad-m/github-push-action@master
