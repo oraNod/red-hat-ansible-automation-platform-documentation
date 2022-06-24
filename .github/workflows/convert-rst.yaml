@@ -22,10 +22,10 @@ jobs:
         run: |
           cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
-      - name: show me
+      - name: move files
         run: |
           cd controller-source
-          ls -1
+          find . -name '*.adoc' -exec mv {} ../controller-adoc \;
 
       - uses: actions/upload-artifact@master
         with:
