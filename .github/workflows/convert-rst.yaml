@@ -18,6 +18,10 @@ jobs:
         run: |
           echo "::set-output name=FILES::$(find . -name '*.rst' -print)"
 
+      - name: show me
+        run: |
+          echo ${{ steps.files_list.outputs.FILES }}
+
       - uses: docker://pandoc/core:latest
         with:
           args: >
