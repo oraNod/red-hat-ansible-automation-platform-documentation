@@ -16,20 +16,19 @@ jobs:
       - name: create file list
         id: files_list
         run: |
-          echo "::set-output name=FILES::$(find . -name '*.rst' -print)"
+          echo "::set-output name=FILES::$(find . -name '*.rst' | while read)"
 
       - uses: docker://pandoc/core:latest
         with:
           args: >
             -f rst
-            -t asciidoc
-            -o ${{ steps.files_list.outputs.FILES }}.adoc ${{ steps.files_list.outputs.FILES }}
+            -t asciidoc ${{ steps.files_list.outputs.FILES }}
+            -o ${{ steps.files_list.outputs.FILES }}.adoc
 
       - name: show me
         run: |
           cd controller-source
           ls -1
-          cat controllerapi/source/sorting.rst.adoc
 
       - uses: actions/upload-artifact@master
         with:
