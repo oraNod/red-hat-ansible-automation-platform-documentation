@@ -2,10 +2,10 @@ name: Convert RST to ADOC
 
 on:
   push:
+    paths:
+      - 'controller-source/**'
     branches:
       - 'master'
-    paths:
-      - 'controller-source/*'
 
 jobs:
   convert_via_pandoc:
