@@ -16,7 +16,7 @@ jobs:
       - name: create file list
         id: files_list
         run: |
-          echo "::set-output name=FILES::$(find . -name '*.rst' -print)"
+          echo "::set-output name=FILES::$(printf '"%s" ' *.rst)"
 
       - name: show me
         run: |
