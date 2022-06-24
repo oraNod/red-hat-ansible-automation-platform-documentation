@@ -36,7 +36,7 @@ jobs:
 
       - name: Copy docs to repo
         run: |
-          cp -r controller-adoc/* red-hat-ansible-automation-platform-documentation/controller-adoc
+          cp -r controller-adoc red-hat-ansible-automation-platform-documentation
 
       - name: Show me
         run: |
