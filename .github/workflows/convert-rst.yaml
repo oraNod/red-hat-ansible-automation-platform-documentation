@@ -28,6 +28,7 @@ jobs:
           find . -name '*.adoc' -exec mv {} ../controller-adoc \;
       - name: commit files
         run: |
+          apk update && apk add git
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
           git add -A
