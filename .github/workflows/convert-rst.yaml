@@ -38,6 +38,11 @@ jobs:
         run: |
           cp -r controller-adoc/* red-hat-ansible-automation-platform-documentation/controller-adoc
 
+      - name: Show me
+        run: |
+          cd red-hat-ansible-automation-platform-documentation/controller-adoc
+          ls controllerapi/source/
+
       - name: Commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
@@ -46,7 +51,7 @@ jobs:
           git config --global user.email "docs-bot@redhat.com"
           git add . --all
           git commit -m "Synchronize converted Controller docs"
-          
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
