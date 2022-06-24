@@ -29,7 +29,7 @@ jobs:
         run: |
           cd controller-source
           ls -1
-          cat sorting.rst.adoc
+          cat controllerapi/source/sorting.rst.adoc
 
       - uses: actions/upload-artifact@master
         with:
