@@ -26,13 +26,27 @@ jobs:
         run: |
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../controller-adoc \;
-      - name: commit files
+
+      - name: Clone infinispan.github.io
+        uses: actions/checkout@master
+        with:
+          repository: oraNod/red-hat-ansible-automation-platform-documentation
+          ref: master
+          path: red-hat-ansible-automation-platform-documentation
+
+      - name: Copy docs to repo
         run: |
-          apt-get -y update && apt-get -y install git
+          cp -r controller-adoc/* red-hat-ansible-automation-platform-documentation/controller-adoc
+
+      - name: Commit files
+        run: |
+          cd red-hat-ansible-automation-platform-documentation
+          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
-          git add -A
+          git add . --all
           git commit -m "Synchronize converted Controller docs"
+          
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
