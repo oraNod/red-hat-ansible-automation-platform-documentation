@@ -10,29 +10,20 @@ on:
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
+    container:
+      image: docker://pandoc/core:latest
+      options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
-
-      - name: create file list
+      - name: create output directories
         id: files_list
         run: |
-          echo "::set-output name=FILES::$(printf '"%s" ' *.rst)"
-
-      - name: show me
+          for d in */; do
+            mkdir -p output/$d
+          done
+      - name: convert rst to adoc
         run: |
-          echo ${{ steps.files_list.outputs.FILES }}
-
-      - uses: docker://pandoc/core:latest
-        run: |
-          cd controller-source
-          mkdir converted-asciidoc
-          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
-          find . -name '*.adoc' -exec mv {} ./converted-asciidoc \;
-
-      - name: show me
-        run: |
-          cd controller-source
-          ls -1
+          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "output/${i%.*}.adoc"; done
 
       - uses: actions/upload-artifact@master
         with:
