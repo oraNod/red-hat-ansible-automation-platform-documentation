@@ -41,7 +41,7 @@ jobs:
       - name: Show me
         run: |
           cd red-hat-ansible-automation-platform-documentation/controller-adoc
-          ls controllerapi/source/
+          ls -1
 
       - name: Commit files
         run: |
