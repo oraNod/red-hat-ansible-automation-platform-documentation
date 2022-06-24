@@ -27,7 +27,7 @@ jobs:
 
       - name: show me
         run: |
-          tree -L 3
+          tree -L 5
 
       - uses: actions/upload-artifact@master
         with:
