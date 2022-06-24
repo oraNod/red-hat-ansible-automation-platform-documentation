@@ -44,12 +44,9 @@ jobs:
           cd red-hat-ansible-automation-platform-documentation/controller-adoc
           ls -la
 
-      - name: Commit files
-        uses: EndBug/add-and-commit@v9
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          message: Synchronize converted Controller docs
-          committer_name: docs-bot
-          committer_email: docs-bot@redhat.com
+          commit_message: Synchronize converted Controller docs
 
       - name: Push changes
         uses: ad-m/github-push-action@master
