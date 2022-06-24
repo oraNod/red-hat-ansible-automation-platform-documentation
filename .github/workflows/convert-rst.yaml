@@ -16,7 +16,7 @@ jobs:
       - name: create file list
         id: files_list
         run: |
-          echo "::set-output name=FILES::$(find . -name '*.rst' | while read)"
+          echo "::set-output name=FILES::$(find . -name '*.rst' -print)"
 
       - uses: docker://pandoc/core:latest
         with:
