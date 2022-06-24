@@ -28,7 +28,7 @@ jobs:
           find . -name '*.adoc' -exec mv {} ../controller-adoc \;
       - name: commit files
         run: |
-          apt-get update && apt-get install git
+          apt-get -y update && apt-get -y install git
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
           git add -A
