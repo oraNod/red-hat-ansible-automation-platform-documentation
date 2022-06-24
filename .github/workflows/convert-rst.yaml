@@ -26,18 +26,14 @@ jobs:
         run: |
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../controller-adoc \;
-      - name: push converted asciidoc
+      - name: commit files
         run: |
-          cd controller-adoc
-
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
-
           git add -A
           git commit -m "Synchronize converted Controller docs"
-          git push
-
-      - uses: actions/upload-artifact@master
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          name: output
-          path: controller-adoc
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
