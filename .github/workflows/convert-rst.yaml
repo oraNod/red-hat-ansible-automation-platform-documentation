@@ -25,7 +25,7 @@ jobs:
       - name: show me
         run: |
           cd controller-source
-          tree -L 3
+          ls -1
 
       - uses: actions/upload-artifact@master
         with:
