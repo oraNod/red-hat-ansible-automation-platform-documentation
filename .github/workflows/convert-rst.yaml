@@ -5,7 +5,7 @@ on:
     branches:
       - 'master'
     paths:
-      - 'controller-source'
+      - 'controller-source/*'
 
 jobs:
   convert_via_pandoc:
