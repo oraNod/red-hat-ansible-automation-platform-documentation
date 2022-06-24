@@ -11,7 +11,7 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     container:
-      image: docker://pandoc/core:latest-ubuntu
+      image: docker://pandoc/core:latest
       options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +22,7 @@ jobs:
         run: |
           cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
+
       - name: move files
         run: |
           cd controller-source
@@ -41,7 +42,7 @@ jobs:
       - name: Show me
         run: |
           cd red-hat-ansible-automation-platform-documentation/controller-adoc
-          ls -1
+          ls -la
 
       - name: Commit files
         run: |
