@@ -1,0 +1,35 @@
+name: Advanced Usage
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'controller-source'
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: create file list
+        id: files_list
+        run: |
+          echo "::set-output name=FILES::$(find . -name '*.rst' -print)"
+
+      - uses: docker://pandoc/core:latest
+        with:
+          args: >
+            -f rst
+            -t asciidoc
+            -o controller-adoc/${{ steps.files_list.outputs.FILES%.* }}.pdf ${{ steps.files_list.outputs.FILES }}
+
+      - name: show me
+        run: |
+          tree -L 3
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: controller-adoc
