@@ -47,7 +47,6 @@ jobs:
       - name: Commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
-          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
           git add . --all
