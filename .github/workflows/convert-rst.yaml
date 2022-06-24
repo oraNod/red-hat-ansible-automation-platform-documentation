@@ -21,9 +21,12 @@ jobs:
           for d in */; do
             mkdir -p output/$d
           done
+      - name: show me
+        run: |
+          ls -1
       - name: convert rst to adoc
         run: |
-          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "output/${i%.*}.adoc"; done
+          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o output/"${i%.*}.adoc"; done
 
       - uses: actions/upload-artifact@master
         with:
