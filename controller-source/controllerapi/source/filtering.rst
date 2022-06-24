@@ -47,7 +47,7 @@ For more about what types of operators are available, refer to: https://docs.dja
 
 .. note::
 
-    You can also watch the API as the UI is being used to see how it is filtering on various criteria.  
+    You can also watch the API as the UI is being used to see how it is filtering on various criteria.
 
 
 
@@ -117,8 +117,3 @@ For example, ``?created__gte=2020-01-01`` will provide a list of items created a
 Null values may be specified as ``None`` or ``Null`` (both case-insensitive), though it is preferred to use the ``isnull`` lookup to explicitly check for null values.
 
 Lists (for the ``in`` lookup) may be specified as a comma-separated list of values.
-
-Filtering based on the requesting user's level of access by query string parameter (added in |at| 3.1):
-
-- ``role_level``: Level of role to filter on, such as ``admin_role``
-
