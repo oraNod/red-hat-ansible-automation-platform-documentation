@@ -23,7 +23,7 @@ jobs:
           args: >
             -f rst
             -t asciidoc
-            -o controller-adoc/${{ steps.files_list.outputs.FILES }}.adoc ${{ steps.files_list.outputs.FILES }}
+            -o ${{ steps.files_list.outputs.FILES }}.adoc ${{ steps.files_list.outputs.FILES }}
 
       - name: show me
         run: |
