@@ -23,11 +23,11 @@ jobs:
           echo ${{ steps.files_list.outputs.FILES }}
 
       - uses: docker://pandoc/core:latest
-        with:
-          args: >
-            -f rst
-            -t asciidoc ${{ steps.files_list.outputs.FILES }}
-            -o ${{ steps.files_list.outputs.FILES }}.adoc
+        run: |
+          cd controller-source
+          mkdir converted-asciidoc
+          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
+          find . -name '*.adoc' -exec mv {} ./converted-asciidoc \;
 
       - name: show me
         run: |
