@@ -47,6 +47,7 @@ jobs:
       - name: Commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
+          ls -la
           git config --global user.name "docs-bot"
           git config --global user.email "docs-bot@redhat.com"
           git add . --all
