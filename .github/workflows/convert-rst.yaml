@@ -20,10 +20,11 @@ jobs:
           ls -1
       - name: convert rst to adoc
         run: |
+          cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
       - name: show me
         run: |
-          tree -L 5
+          ls -1
 
       - uses: actions/upload-artifact@master
         with:
