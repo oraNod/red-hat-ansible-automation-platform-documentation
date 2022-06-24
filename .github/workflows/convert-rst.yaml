@@ -11,7 +11,7 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     container:
-      image: docker://pandoc/core:latest
+      image: docker://pandoc/core:latest-ubuntu
       options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
