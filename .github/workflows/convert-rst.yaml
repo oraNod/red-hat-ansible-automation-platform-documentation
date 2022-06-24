@@ -15,18 +15,15 @@ jobs:
       options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
-      - name: create output directories
-        id: files_list
-        run: |
-          for d in */; do
-            mkdir -p output/$d
-          done
       - name: show me
         run: |
           ls -1
       - name: convert rst to adoc
         run: |
-          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o output/"${i%.*}.adoc"; done
+          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
+      - name: show me
+        run: |
+          tree -L 5
 
       - uses: actions/upload-artifact@master
         with:
