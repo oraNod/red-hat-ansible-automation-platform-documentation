@@ -39,10 +39,9 @@ jobs:
         run: |
           cp -r controller-adoc red-hat-ansible-automation-platform-documentation
 
-      - name: Show me
-        run: |
-          cd red-hat-ansible-automation-platform-documentation/controller-adoc
-          ls -la
+  commit_changes:
+    runs-on: ubuntu-latest
+    steps:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
