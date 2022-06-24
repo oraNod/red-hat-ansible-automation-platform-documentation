@@ -1,7 +1,7 @@
 Controller API Reference Guide
 ================================
 
-Inserting a change to trigger the action.
+
 
 
 The automation controller API Reference Manual provides in-depth documentation for Red Hat Ansible Automation Platform's controller REST API, including examples on how to integrate with it.
