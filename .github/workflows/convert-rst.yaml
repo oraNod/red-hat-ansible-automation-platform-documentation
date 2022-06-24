@@ -1,4 +1,4 @@
-name: Advanced Usage
+name: Convert RST to ADOC
 
 on:
   push:
