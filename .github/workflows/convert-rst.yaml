@@ -46,6 +46,10 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          repository: red-hat-ansible-automation-platform-documentation
+          branch: master
+          commit_user_name: docs-bot
+          commit_user_email: docs-bot@redhat.com
           commit_message: Synchronize converted Controller docs
 
       - name: Push changes
