@@ -20,10 +20,10 @@ jobs:
           cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
 
-      - name: Install git
+      - name: install git
         run: apt-get -y update && apt-get -y install git
 
-      - name: Clone infinispan.github.io
+      - name: clone infinispan.github.io
         uses: actions/checkout@master
         with:
           repository: oraNod/red-hat-ansible-automation-platform-documentation
@@ -35,4 +35,12 @@ jobs:
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
           cd ../red-hat-ansible-automation-platform-documentation/controller-adoc
-          ls -la
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: red-hat-ansible-automation-platform-documentation
+          branch: master
+          commit_user_name: docs-bot
+          commit_user_email: docs-bot@redhat.com
+          commit_message: Synchronize converted Controller docs
