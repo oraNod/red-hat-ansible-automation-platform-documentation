@@ -49,6 +49,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           directory: red-hat-ansible-automation-platform-documentation
-          github_url: https://github.com/oraNod/red-hat-ansible-automation-platform-documentation.git
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
