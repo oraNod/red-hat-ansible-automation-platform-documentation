@@ -32,11 +32,11 @@ jobs:
           ref: master
           path: red-hat-ansible-automation-platform-documentation
 
-      - name: Copy docs to repo
+      - name: Copy docs to adoc folder
         run: |
           cp -r controller-adoc red-hat-ansible-automation-platform-documentation
-
-      - name: Show me
-        run: |
           cd red-hat-ansible-automation-platform-documentation/controller-adoc
           ls -la
+
+      - name: Install git
+        run: sudo apt-get -y update && sudo apt-get -y install git
