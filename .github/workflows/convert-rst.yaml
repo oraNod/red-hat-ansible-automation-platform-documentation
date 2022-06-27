@@ -47,5 +47,6 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
+          github_url: https://github.com/oraNod/red-hat-ansible-automation-platform-documentation.git
           github_token: ${{ secrets.ORANOD }}
           branch: ${{ github.ref }}
