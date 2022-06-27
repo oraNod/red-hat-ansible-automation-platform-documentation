@@ -1,0 +1,53 @@
+name: Convert Controller RST to ADOC
+
+on:
+  push:
+    paths:
+      - 'controller-rst/**'
+    branches:
+      - 'demo-controller-rst'
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://pandoc/core:latest-ubuntu
+      options: --entrypoint=sh
+    steps:
+      - uses: actions/checkout@v2
+      - name: convert rst to adoc
+        run: |
+          cd controller-rst
+          find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
+
+      - name: install git
+        run: apt-get -y update && apt-get -y install git
+
+      - name: clone infinispan.github.io
+        uses: actions/checkout@v2
+        with:
+          repository: oraNod/red-hat-ansible-automation-platform-documentation
+          persist-credentials: false
+          fetch-depth: 0
+          ref: master
+          path: red-hat-ansible-automation-platform-documentation
+
+      - name: move files
+        run: |
+          cd controller-rst
+          find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
+
+      - name: commit files
+        run: |
+          cd red-hat-ansible-automation-platform-documentation
+          git config --local user.email "docs-bot@redhat.com"
+          git config --local user.name "docs-bot"
+          git add . --all
+          git commit -m "Synchronize converted Controller docs"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          directory: red-hat-ansible-automation-platform-documentation
+          github_token: ${{ secrets.ORANOD }}
+          branch: ${{ github.ref }}
