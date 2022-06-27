@@ -39,8 +39,8 @@ jobs:
         run: |
           cd red-hat-ansible-automation-platform-documentation
           git commit -m "Synchronize converted Controller docs" -a
-          git config --local user.email "docs-bot@redhat.com"
-          git config --local user.name "docs-bot"
+          git config --global user.email "docs-bot@redhat.com"
+          git config --global user.name "docs-bot"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
