@@ -15,34 +15,24 @@ jobs:
       options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
-      - name: show me
-        run: |
-          ls -1
       - name: convert rst to adoc
         run: |
           cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
-
       - name: move files
         run: |
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../controller-adoc \;
-
       - name: Clone infinispan.github.io
         uses: actions/checkout@master
         with:
           repository: oraNod/red-hat-ansible-automation-platform-documentation
           ref: master
           path: red-hat-ansible-automation-platform-documentation
-
       - name: Copy docs to repo
-        run: |
-          cp -r controller-adoc red-hat-ansible-automation-platform-documentation
-
+        run: cp -r controller-adoc red-hat-ansible-automation-platform-documentation
       - name: Install git
-        run: |
-          sudo apt-get -y update && sudo apt-get -y install git
-
+        run: sudo apt-get -y update && sudo apt-get -y install git
       - name: Commit
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -51,7 +41,6 @@ jobs:
           commit_user_name: docs-bot
           commit_user_email: docs-bot@redhat.com
           commit_message: Synchronize converted Controller docs
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
