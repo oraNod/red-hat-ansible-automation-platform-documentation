@@ -23,18 +23,10 @@ jobs:
       - name: install git
         run: apt-get -y update && apt-get -y install git
 
-      - name: clone infinispan.github.io
-        uses: actions/checkout@v2
-        with:
-          repository: oraNod/red-hat-ansible-automation-platform-documentation
-          ref: master
-          path: red-hat-ansible-automation-platform-documentation
-
       - name: move files
         run: |
           cd controller-source
-          find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
-          cd ../red-hat-ansible-automation-platform-documentation/controller-adoc
+          find . -name '*.adoc' -exec mv {} ../controller-adoc \;
 
       - name: Commit
         uses: EndBug/add-and-commit@v9
