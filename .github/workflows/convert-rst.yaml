@@ -14,7 +14,6 @@ jobs:
       image: docker://pandoc/core:latest-ubuntu
       options: --entrypoint=sh
     steps:
-      - uses: actions/checkout@v2
       - name: convert rst to adoc
         run: |
           cd controller-source
@@ -24,11 +23,12 @@ jobs:
         run: apt-get -y update && apt-get -y install git
 
       - name: clone infinispan.github.io
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           repository: oraNod/red-hat-ansible-automation-platform-documentation
           ref: master
           path: red-hat-ansible-automation-platform-documentation
+          token: ${{ secrets.PAT }}
 
       - name: move files
         run: |
@@ -41,6 +41,6 @@ jobs:
         with:
           repository: red-hat-ansible-automation-platform-documentation
           branch: master
-          commit_user_name: docs-bot
-          commit_user_email: docs-bot@redhat.com
+          commit_user_name: dnaro
+          commit_user_email: dnaro@redhat.com
           commit_message: Synchronize converted Controller docs
