@@ -15,7 +15,6 @@ jobs:
       options: --entrypoint=sh
     steps:
       - uses: actions/checkout@v2
-
       - name: convert rst to adoc
         run: |
           cd controller-source
