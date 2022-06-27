@@ -38,8 +38,8 @@ jobs:
       - name: Commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
-          git config --global user.email "docs-bot@redhat.com"
-          git config --global user.name "docs-bot"
+          git config --local user.email "docs-bot@redhat.com"
+          git config --local user.name "docs-bot"
           git add . --all
           git commit -m "Synchronize converted Controller docs"
 
