@@ -29,7 +29,6 @@ jobs:
           repository: oraNod/red-hat-ansible-automation-platform-documentation
           ref: master
           path: red-hat-ansible-automation-platform-documentation
-          token: ${{ secrets.PAT }}
 
       - name: move files
         run: |
@@ -40,6 +39,7 @@ jobs:
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          token: ${{ secrets.PAT }}
           repository: red-hat-ansible-automation-platform-documentation
           branch: master
           commit_user_name: dnaro
