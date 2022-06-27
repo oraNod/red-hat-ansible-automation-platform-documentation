@@ -37,11 +37,8 @@ jobs:
           cd ../red-hat-ansible-automation-platform-documentation/controller-adoc
 
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: EndBug/add-and-commit@v9
         with:
-          token: ${{ secrets.PAT }}
-          repository: red-hat-ansible-automation-platform-documentation
-          branch: master
-          commit_user_name: dnaro
-          commit_user_email: dnaro@redhat.com
-          commit_message: Synchronize converted Controller docs
+          committer_name: docs-bot
+          committer_email: docs-bot@redhat.com
+          message: Synchronize converted Controller docs
