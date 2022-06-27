@@ -39,10 +39,11 @@ jobs:
         run: |
           cp -r controller-adoc red-hat-ansible-automation-platform-documentation
 
-  commit_changes:
-    runs-on: ubuntu-latest
-    steps:
+      - name: Install git
+        run: |
+          sudo apt-get -y update && sudo apt-get -y install git
 
+      - name: Commit
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           repository: red-hat-ansible-automation-platform-documentation
