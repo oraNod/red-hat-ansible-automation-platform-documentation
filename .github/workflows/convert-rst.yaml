@@ -35,7 +35,7 @@ jobs:
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
 
-      - name: Commit files
+      - name: commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
           git config --local user.email "dnaro@redhat.com"
@@ -44,7 +44,12 @@ jobs:
           git commit -m "Synchronize converted Controller docs"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ORANOD }}
         with:
-          github_token: ${{ secrets.ORANOD }}
-          branch: master
+          source-directory: 'red-hat-ansible-automation-platform-documentation'
+          destination-github-username: 'oraNod'
+          destination-repository-name: 'oraNod/red-hat-ansible-automation-platform-documentation'
+          user-email: dnaro@redhat.com
+          target-branch: master
