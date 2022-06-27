@@ -35,11 +35,15 @@ jobs:
           cd controller-source
           find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
 
-      - name: Commit
-        uses: EndBug/add-and-commit@v9
+      - name: Commit files
+        run: |
+          cd red-hat-ansible-automation-platform-documentation
+          git commit -m "Synchronize converted Controller docs" -a
+          git config --local user.email "docs-bot@redhat.com"
+          git config --local user.name "docs-bot"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          cwd: './red-hat-ansible-automation-platform-documentation/'
-          add: '*.adoc --force'
-          committer_name: docs-bot
-          committer_email: docs-bot@redhat.com
-          message: Synchronize converted Controller docs
+          github_token: ${{ secrets.ORANOD }}
+          branch: master
