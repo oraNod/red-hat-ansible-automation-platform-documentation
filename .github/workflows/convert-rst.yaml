@@ -20,10 +20,8 @@ jobs:
           cd controller-source
           find . -name "*.rst*" | while read i; do pandoc -f rst -t asciidoc "$i" -o "${i%.*}.adoc"; done
 
-      - name: move files
-        run: |
-          cd controller-source
-          find . -name '*.adoc' -exec mv {} ../controller-adoc \;
+      - name: Install git
+        run: apt-get -y update && apt-get -y install git
 
       - name: Clone infinispan.github.io
         uses: actions/checkout@master
@@ -32,11 +30,9 @@ jobs:
           ref: master
           path: red-hat-ansible-automation-platform-documentation
 
-      - name: Copy docs to adoc folder
+      - name: move files
         run: |
-          cp -r controller-adoc red-hat-ansible-automation-platform-documentation
-          cd red-hat-ansible-automation-platform-documentation/controller-adoc
+          cd controller-source
+          find . -name '*.adoc' -exec mv {} ../red-hat-ansible-automation-platform-documentation/controller-adoc \;
+          cd ../red-hat-ansible-automation-platform-documentation/controller-adoc
           ls -la
-
-      - name: Install git
-        run: apt-get -y update && apt-get -y install git
