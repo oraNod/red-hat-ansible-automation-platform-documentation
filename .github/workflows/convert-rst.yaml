@@ -50,6 +50,6 @@ jobs:
         with:
           source-directory: 'red-hat-ansible-automation-platform-documentation'
           destination-github-username: 'oraNod'
-          destination-repository-name: 'oraNod/red-hat-ansible-automation-platform-documentation'
+          destination-repository-name: 'red-hat-ansible-automation-platform-documentation'
           user-email: dnaro@redhat.com
           target-branch: master
