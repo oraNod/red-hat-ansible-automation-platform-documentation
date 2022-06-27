@@ -27,6 +27,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: oraNod/red-hat-ansible-automation-platform-documentation
+          persist-credentials: false
           ref: master
           path: red-hat-ansible-automation-platform-documentation
 
@@ -38,18 +39,13 @@ jobs:
       - name: commit files
         run: |
           cd red-hat-ansible-automation-platform-documentation
-          git config --local user.email "dnaro@redhat.com"
-          git config --local user.name "oraNod"
+          git config --local user.email "docs-bot@redhat.com"
+          git config --local user.name "docs-bot"
           git add . --all
           git commit -m "Synchronize converted Controller docs"
 
       - name: Push changes
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.ORANOD }}
+        uses: ad-m/github-push-action@master
         with:
-          source-directory: 'red-hat-ansible-automation-platform-documentation'
-          destination-github-username: 'oraNod'
-          destination-repository-name: 'red-hat-ansible-automation-platform-documentation'
-          user-email: dnaro@redhat.com
-          target-branch: master
+          github_token: ${{ secrets.ORANOD }}
+          branch: ${{ github.ref }}
